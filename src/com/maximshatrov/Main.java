@@ -10,19 +10,20 @@ public class Main {
     private static Log log = new Log();
 
     public static void main(String[] args) {
+        Main main = new Main();
         if (args.length == 0) {
             args = new String[]{"https://www.simbirsoft.com/"};
             log.putToLog("Не указаны входные данные! Получаем статистику по странице по-умолчанию: " + args[0]);
             System.err.println("Не указаны входные данные! \nПолучаем статистику по странице по-умолчанию: " + args[0]);
-            parseAndPrint(args);
+            main.parseAndPrint(args);
         } else {
             log.putToLog("Получаем статистику по странице: " + args[0]);
             System.out.println("Получаем статистику по странице: " + args[0]);
-            parseAndPrint(args);
+            main.parseAndPrint(args);
         }
     }
 
-    private static void parseAndPrint(String[] args) {
+    private void parseAndPrint(String[] args) {
         Parser parser = new Parser(args[0]);
         Counter counter = null;
         try {
@@ -31,18 +32,18 @@ public class Main {
                 System.out.println(entry.getKey() + " - " + entry.getValue());
             }
         } catch (UnknownHostException e) {
-            printLog("Недоступный URL адрес!", e);
+            printExceptionLog("Недоступный URL адрес!", e);
         } catch (IllegalArgumentException | IOException e) {
-            printLog("Некорректный URL адрес!", e);
+            printExceptionLog("Некорректный URL адрес!", e);
         }
     }
 
-    private static void printLog(String line, Exception e) {
+    private void printExceptionLog(String line, Exception e) {
         log.putToLog(line);
         System.err.println(line + " \nПодробности в файле " + log.getName());
         StringWriter errors = new StringWriter();
         e.printStackTrace(new PrintWriter(errors));
-        log.putToLog("printStackTrace \n    " + errors.toString());
+        log.putToLog("printStackTrace: \n    " + errors.toString());
         log.endLog();
     }
 }
