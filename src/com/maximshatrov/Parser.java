@@ -13,13 +13,9 @@ public class Parser {
         this.url = url;
     }
 
-    public String parse() {
+    public String parse() throws IOException, IllegalArgumentException {
         Document page = null;
-        try {
-            page = Jsoup.connect(url).get();
-        } catch (IOException e) {
-            System.err.println("Неправильный URL адрес!");
-        }
+        page = Jsoup.connect(url).get();
         return page.body().text();      //возвращаем только текст из секции <body>
     }
 }
