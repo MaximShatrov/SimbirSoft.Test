@@ -7,8 +7,17 @@ import java.net.UnknownHostException;
 import java.util.Map;
 
 public class Main {
+    /**
+     * Переменная, хранящая лог
+     */
     private static Log log = new Log();
 
+
+    /**
+     * Точка входа в программу
+     *
+     * @param args ссылка на сайт, по которому нелбходимо вывести статистику в формате "https://***" либо "http://***"
+     */
     public static void main(String[] args) {
         Main main = new Main();
         if (args.length == 0) {

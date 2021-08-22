@@ -3,7 +3,13 @@ package com.maximshatrov;
 import java.util.*;
 
 public class Counter {
+    /**
+     * List<String> образованный из String rawText при создании объекта Counter, с удаленными знаками препинания и цифрами
+     */
     private List<String> textList;
+    /**
+     * Map<String, Integer> уникальных слов из textlist
+     */
     private Map<String, Integer> uniqEntryHashMap;
 
     Counter(String rawText) {
@@ -19,6 +25,11 @@ public class Counter {
 
     }
 
+    /**
+     * Создание Map из уникальных слов, длиннее 3 символов
+     *
+     * @return Map<String , Integer>, где String key это уникальное слово, а int value - колличество повторений этого слова в String rawText
+     */
     public Map<String, Integer> getResult() {
         Iterator<String> iter = textList.iterator();
         while (iter.hasNext()) {
